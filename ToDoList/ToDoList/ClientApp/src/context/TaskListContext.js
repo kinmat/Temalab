@@ -16,6 +16,7 @@ const TaskListContextProvider = props => {
         const response = await fetch('api/Tasks');
         const data = await response.json();
         setTasks(data);
+        console.log(data);
         return data;
     }
 
@@ -26,15 +27,17 @@ const TaskListContextProvider = props => {
         formData.append('DueDate', dateFormat(task.dueDate));
         formData.append('Description', task.description);
         */
-        let data = JSON.stringify(task);
-        console.log(data)
-      // let newData = { Title: task.title, Id: task.id, CurrState: task.currState, DueDate: task.dueDate, Description: task.description };
-      // newData = JSON.stringify(newData);
-      //  console.log(newData);
+       // let data = JSON.stringify(task);
+       // console.log(data)
+       let newData = { Title: task.title,CurrState: task.currState, DueDate: task.dueDate, Description: task.description };
+       newData = JSON.stringify(newData);
         fetch('api/Tasks', {
             method: 'POST',
-            body: data,
-            contentType: 'application/json'
+            body: newData,
+           // contentType: 'application/json',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
         });
     }
 
@@ -45,16 +48,21 @@ const TaskListContextProvider = props => {
     }
 
     async function updateTask(title, id, state, desc, due) {
-        var formData = new FormData();
+   /*     var formData = new FormData();
         formData.append('Title', title);
         formData.append('Id', id);
         formData.append('CurrState', state);
         formData.append('DueDate', dateFormat(due));
         formData.append('Description', desc);
+        */
+        let newData = { Title: title,Id: id, CurrState: state, DueDate: due, Description: desc };
+        newData = JSON.stringify(newData);
         fetch(`api/Tasks/${id}`, {
             method: 'PUT',
-            body: formData,
-            contentType: 'application/json'
+            body: newData,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
     }
     
@@ -62,7 +70,10 @@ const TaskListContextProvider = props => {
     const addTask = (title, state, dueDate, desc) => {
         if (title.trim() && state !== "0") {
             let newTask;
-            setTasks([...tasks, newTask = { title, id: uuid(), currState: state, dueDate: new Date(dueDate), description: desc }]);
+            let newId;
+            if (tasks.length > 0) newId = tasks[tasks.length - 1].id + 1;
+                else newId = 0;
+            setTasks([...tasks, newTask = { title, id: newId, currState: state, dueDate: new Date(dueDate), description: desc }]);
             backupTasks(newTask);
         }
        
@@ -97,8 +108,7 @@ const TaskListContextProvider = props => {
     }
 
     const editTask = (title, id, state, dueDate, desc) => {
-        console.log(tasks);
-         setTasks(tasks.map(task => (task.id === id ? { title, id, state, dueDate, desc } : task)));
+         setTasks(tasks.map(task => (task.id === id ? { title, id, currState: state, dueDate, desc } : task)));
          updateTask(title, id, state, desc,dueDate);
        
       }

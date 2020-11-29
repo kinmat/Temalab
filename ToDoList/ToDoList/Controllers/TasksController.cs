@@ -47,14 +47,15 @@ namespace ToDoList.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTasks(int id, [FromForm]Tasks tasks)
+        public async Task<IActionResult> PutTasks(int id, [FromBody]Tasks tasks)
         {
-            if (id != tasks.Id)
-            {
-                return BadRequest();
-            }
+               if (id != tasks.Id)
+                {
+                    return BadRequest();
+                }
+            
 
-            _context.Entry(tasks).State = EntityState.Modified;
+            _context.Entry(tasks).State = EntityState.Modified; 
 
             try
             {

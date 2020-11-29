@@ -10,7 +10,7 @@ const TaskPopUp = ({ task }) => {
   const [dueDate, setStartDate] = useState(new Date(task.dueDate));
   const [state, setState] = useState("0");
     
-  const handleSelect = e => {
+    const handleSelect = e => {
     setState(e.target.value);
   };
 
