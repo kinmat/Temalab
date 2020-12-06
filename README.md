@@ -16,4 +16,17 @@ A frontend részének forráskódja a projekt ClientApp mappájában található
  - **Task:** egy teendő, tulajdonságai: ID, cím, státusz, határidő, leírás, módosítás és törlés gomb
  - **TaskListPopUp:** Ez a dialógusablak, ami felugrik, amikor a task módosításra kattintunk, a task minden részlete látható rajta. A módosítás gombra kattintva lehet módosítani a határidőt és a státuszt, ezt a Save gombra kattintva lehet elmenteni. Az ablakot bezárni a Close gombbal vagy a jobb felső sarokban lévő X-el lehet bezárni.
 #### Context:
- - **TaskListContext:** 
+**TaskListContext:** Az alkalmazás context komponense, azaz ebben van a taskok listája mint "globális" változó amihez a context hook használatával hozzáfér a többi komponens is.
+ A függvények amik még elérhetőek belőle: 
+- **addTask:** új teendő felvétele
+- **editTask:** teendő módosítása
+- **removeTask:** id alapján teendő törlése
+- **findItem:** id alapján egy teendő megkeresése
+- **clearList:** az összes teendő törlése
+- **dateFormat:** a paraméterként kapott dátumot formázza SQL által elfogadott formátumúra
+
+Használt hook-ok:
+- *createContext*:  
+- *useEffect*
+- *useState* 
+
