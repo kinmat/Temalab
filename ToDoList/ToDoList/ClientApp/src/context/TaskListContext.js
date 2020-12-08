@@ -21,20 +21,11 @@ const TaskListContextProvider = props => {
     }
 
     async function backupTasks(task) {
-     /*   var formData = new FormData();
-        formData.append('Title', task.title);
-        formData.append('CurrState', task.currState);
-        formData.append('DueDate', dateFormat(task.dueDate));
-        formData.append('Description', task.description);
-        */
-       // let data = JSON.stringify(task);
-       // console.log(data)
        let newData = { Title: task.title,CurrState: task.currState, DueDate: task.dueDate, Description: task.description };
        newData = JSON.stringify(newData);
         fetch('api/Tasks', {
             method: 'POST',
             body: newData,
-           // contentType: 'application/json',
             headers: {
                 'Content-Type' : 'application/json'
             }
@@ -48,13 +39,6 @@ const TaskListContextProvider = props => {
     }
 
     async function updateTask(title, id, state, desc, due) {
-   /*     var formData = new FormData();
-        formData.append('Title', title);
-        formData.append('Id', id);
-        formData.append('CurrState', state);
-        formData.append('DueDate', dateFormat(due));
-        formData.append('Description', desc);
-        */
         let newData = { Title: title,Id: id, CurrState: state, DueDate: due, Description: desc };
         newData = JSON.stringify(newData);
         fetch(`api/Tasks/${id}`, {
@@ -86,6 +70,7 @@ const TaskListContextProvider = props => {
 
     const clearList = () => {
         setTasks([]);
+        tasks.map(task => deleteTask(task.id));
     };
 
     const findItem = id => {
@@ -108,7 +93,7 @@ const TaskListContextProvider = props => {
     }
 
     const editTask = (title, id, state, dueDate, desc) => {
-         setTasks(tasks.map(task => (task.id === id ? { title, id, currState: state, dueDate, desc } : task)));
+         setTasks(tasks.map(task => (task.id === id ? { title, id, currState: state, dueDate, description: desc } : task)));
          updateTask(title, id, state, desc,dueDate);
        
       }

@@ -45,7 +45,6 @@ namespace ToDoList
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddRazorPages();
 
             services.AddDbContext<TaskContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TaskContext")));
@@ -75,10 +74,7 @@ namespace ToDoList
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-              /*  endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}"); */
+                endpoints.MapControllers();  
             });
 
             app.UseSpa(spa =>

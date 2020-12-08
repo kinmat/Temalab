@@ -7,8 +7,8 @@ import "react-datepicker/dist/react-datepicker.css"
 const TaskPopUp = ({ task }) => {
   const { findItem, dateFormat , editTask} = useContext(TaskListContext);
   const [edit, setEdit] = useState(false);
-  const [dueDate, setStartDate] = useState(new Date(task.dueDate));
-  const [state, setState] = useState("0");
+    const [dueDate, setStartDate] = useState(new Date(task.dueDate));
+    const [state, setState] = useState(task.currState);
     
     const handleSelect = e => {
     setState(e.target.value);
@@ -71,8 +71,8 @@ const TaskPopUp = ({ task }) => {
             {stateEdit}
           </div>
           <div className="actions">
-            <button className="button" onClick={() => { close(); setEdit(false);}}> Close </button>
-            <button className="button" onClick={() => { editTask(task.title, task.id, state, dueDate, task.description);setEdit(false) }}> Save</button>
+                      <button className="button" onClick={() => { close(); setEdit(false); }}> Close </button>
+                      <button className="button" onClick={() => { editTask(task.title, task.id, state, dueDate, task.description); setEdit(false); console.log(task.description); }}> Save</button>
           </div>
         </div>
       )}
