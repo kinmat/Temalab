@@ -5,7 +5,6 @@ A feladat egy teendőket kezelő webalkalmazás fejlesztése volt, amiben a teen
 
 Az alkalmazás frontendje React alapú, Visual Studio Code környezetben készítettem. A teendőket adatbázisban tárolom, ehhez REST interfészen keresztül lehet hozzáférni és a backend maga pedig ASP.NET Core alapú, ezen Visual Studio 2019-ben dolgoztam. Ezen kívül készítettem Unit tesztet a backend kód ellenőrzéséhez.
 
-Az adatokat ároló adatbázist létrehozó script a database.sql fájlban található, az adatbázis neve ToDoList.
 ### Beüzemelés
 A projekt megnyitásához szükséges Visual Studio 2019, és ehhez a Tools-ból az ASP.NET Core and web developement pack. Az backend részéhez a projektnek szükséges létrehozni egy adatbázist a localdb-n belül, ennek a neve legyen ToDoList. Az ebben lefuttatandó script a database.sql fájlban található, ez létrehozza a Tasks táblát.
  
