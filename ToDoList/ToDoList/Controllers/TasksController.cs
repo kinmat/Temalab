@@ -85,7 +85,7 @@ namespace ToDoList.Controllers
             _context.Tasks.Add(tasks);
             await _context.SaveChangesAsync();
 
-            var a= CreatedAtAction("GetTasks", new { id = tasks.Id, title=tasks.Title }, tasks);
+            var a= CreatedAtAction("GetTasks", new { id = tasks.Id}, tasks);
             return a;
         }
 
