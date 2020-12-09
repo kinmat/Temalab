@@ -6,6 +6,8 @@ A feladat egy teendőket kezelő webalkalmazás fejlesztése volt, amiben a teen
 Az alkalmazás frontendje React alapú, Visual Studio Code környezetben készítettem. A teendőket adatbázisban tárolom, ehhez REST interfészen keresztül lehet hozzáférni és a backend maga pedig ASP.NET Core alapú, ezen Visual Studio 2019-ben dolgoztam. Ezen kívül készítettem Unit tesztet a backend kód ellenőrzéséhez.
 
 Az adatokat ároló adatbázist létrehozó script a database.sql fájlban található, az adatbázis neve ToDoList.
+### Beüzemelés
+A projekt megnyitásához szükséges Visual Studio 2019, és ehhez a Tools-ból az ASP.NET Core and web developement pack. Az backend részéhez a projektnek szükséges létrehozni egy adatbázist a localdb-n belül, ennek a neve legyen ToDoList. Az ebben lefuttatandó script a database.sql fájlban található, ez létrehozza a Tasks táblát.
  
 ### Frontend
 
@@ -45,4 +47,7 @@ A **Data/TaskContext.cs** osztály felel az Entity Framework Core megvalósítá
 A **Controllers/TasksController.cs** osztály a TaskContext-et kapja meg konstruktor paraméterként és ennek használatával REST API HTTP kérésekkel kommunikál az adatbázis szerverrel. Az itt található request típusok: *GET, POST, PUT, DELETE*. Az elérési címük: `Tasks/Api`
 
 ### Unit teszt
-
+A Unit tesztek a ToDoListTests projektben a UnitTests.cs fájlban találhatóak, NUnit alapúak. A tesztekhez szükséges volt létrehozni egy Mock, In-Memory adatbázist, ennek a "MockTaskList" nevet adtam. Az ehhez szükésges package, a Microsoft.EntityFrameworkCore.InMemory meg van adva a projekt függőségeiben. Ezen kívül a szükséges volt egy projekt referenciát hozzáadni, ami a webalkalmazás projektjére mutat, hogy hozzáférhetőek legyenek az tesztelendő osztályok. A tesztelt rész a TasksController helyes működése adott adabázissal.
+- **Setup**: Létrehoz egy adatbázist.
+- **GetTest**: Hozzáad két elemet az adatbázishoz, majd az elsőt visszakéri GET metódussal. Ha azt az elemet kapja vissza, sikeres.
+- **PostTest**: Létrehoz egy új Task-ot, azt POST metódussal betölti az adatbázisba. Ha bekerült helyesen az adatbázisba, a teszt sikeres.
